@@ -1,0 +1,109 @@
+{% load static %}
+{% load custom_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<style>
+		table {
+		  font-family: arial, sans-serif;
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+		
+		td, th {
+		  border: 1px solid #dddddd;
+		  text-align: left;
+		  padding: 8px;
+		}
+		
+		tr:nth-child(even) {
+		  background-color: #dddddd;
+		}
+	</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Banking System Export Management</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+	<link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+	<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+	<script src="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/js/bootstrap-datetimepicker.min.js"></script>
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+					<h3 class="text-center text-primary" style="text-align: center;">
+						Bank System
+					</h3>
+				</div>
+				<div class="col-md-4">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>
+						Export Transaction Details
+					</h3>
+					<p>
+						Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+					</p>
+					{% if form %}
+					<form action="" method="">
+						{% csrf_token %}
+						{{ form.as_table }}
+						<button name="export_form" type="submit" class="button" formmethod="POST">Submit</button>
+					</form>
+					{% endif %}
+				</div>
+			</div>
+			{% if transactions %}
+			<div class="row">
+				<div class="col-md-12">
+					<h3 style="text-align: center;">
+						Transaction Details
+					</h3>
+					<a href="{% getTransactionExport account start_date end_date %}" target="_blank" style="margin: 5px; margin-bottom: 10px;">Download Data</a>
+					<table>
+						<tr>
+							<th>Account No.</th>
+							<th>Transaction Number</th>
+							<th>Transaction Type</th>
+							<th>Amount</th>
+							<th>Date</th>
+						</tr>
+						{% for transaction in transactions %}
+						<tr>
+							<td>{{ transaction.account.account_number }}</td>
+							<td>{{ transaction.transaction_number }}</td>
+							<td>{{ transaction.transaction_type }}</td>
+							<td>{{ transaction.amount }}</td>
+							<td>{{ transaction.created_at }}</td>
+						</tr>
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+			{% endif %}
+			<div class="row">
+				<div class="col-md-6">
+				</div>
+				<div class="col-md-6">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+  </body>
+</html>
