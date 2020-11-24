@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'phonenumber_field',
     'django_celery_beat',
-    'django_celery_results'
+    'django_celery_results',
+    'post_office'
 ]
 
 MIDDLEWARE = [
@@ -138,6 +139,19 @@ MEDIA_URL = '/media/'
 
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 SITE_URL = 'http://localhost:8000'
+
+POST_OFFICE = {
+    'BACKENDS': {
+        'default': 'django_ses.SESBackend',
+    }
+}
+
+AWS_ACCESS_KEY_ID = 'YOUR-ACCESS-KEY-ID'
+AWS_SECRET_ACCESS_KEY = 'YOUR-SECRET-ACCESS-KEY'
+AWS_SES_REGION_NAME = 'us-west-2'
+AWS_SES_REGION_ENDPOINT = 'email.us-west-2.amazonaws.com'
+DEFAULT_EMAIL_SENDER = "test@test.com"
+
 
 try:
     from .local_settings import *

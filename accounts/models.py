@@ -51,7 +51,7 @@ class Account(BaseModelClass):
     def exportTrasactionData(self, start_date=datetime.now().date() - timedelta(days=60), end_date=datetime.now().date()):
         data = self.getTransactionData(start_date, end_date).values()
         df = pd.DataFrame(list(data))
-        fileName = hashlib.sha256().hexdigest()[:10] + ".csv"
+        fileName = hashlib.sha256(",".join([str(start_date), str(end_date), str(self.account_number)]).encode('utf-8')).hexdigest()[:10] + ".csv"
         filePath = "/".join([settings.MEDIA_ROOT, "exports", fileName])
         df.to_csv(filePath, encoding="utf-8")
         completePath = "/".join([settings.SITE_URL, "media/exports",fileName])

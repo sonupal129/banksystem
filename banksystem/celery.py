@@ -21,3 +21,15 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 app.conf.broker_url = BASE_REDIS_URL
+
+
+app.conf.beat_schedule = {
+    'send-queued-mail': {
+        'task': 'post_office.tasks.send_queued_mail',
+        'schedule': 600.0,
+    },
+    'cleanup_mail': {
+        'task': 'post_office.tasks.cleanup_mail',
+        'schedule': 600.0, #TBD timeframe
+    },
+}
