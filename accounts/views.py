@@ -1,11 +1,13 @@
 from .imports import *
 from .forms import *
+from .mixins import *
 # Create your views here.
 
 
-class HomeView(FormView):
+class HomeView(BasePermissionMixin, GroupRequiredMixins, FormView):
     http_method_names = ["get", "post"]
     template_name = "templates/home.html"
+    group_required = ["customer", "manager"]
     
     def get_context_data(self, **kwargs):
         if "transaction_form" not in kwargs:
@@ -34,10 +36,11 @@ class HomeView(FormView):
         return self.render_to_response(self.get_context_data(**kwargs))
 
 
-class TransactionExportView(FormView):
+class TransactionExportView(BasePermissionMixin, GroupRequiredMixins, FormView):
     http_method_names = ["get", "post"]
     template_name = "templates/export.html"
     form_class = TransactionExportForm
+    group_required = ["manager"]
 
 
     def post(self, request, **kwargs):

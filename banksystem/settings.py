@@ -128,6 +128,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+# Media Files Settings
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -137,20 +138,40 @@ STATICFILES_DIRS = [
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# Phone Number Library
+
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
+
+# Global Site URL
 SITE_URL = 'http://localhost:8000'
 
+# POST Office Settings
 POST_OFFICE = {
     'BACKENDS': {
         'default': 'django_ses.SESBackend',
     }
 }
-
+# DJANGO_SES Settings to Send email
 AWS_ACCESS_KEY_ID = 'YOUR-ACCESS-KEY-ID'
 AWS_SECRET_ACCESS_KEY = 'YOUR-SECRET-ACCESS-KEY'
 AWS_SES_REGION_NAME = 'us-west-2'
 AWS_SES_REGION_ENDPOINT = 'email.us-west-2.amazonaws.com'
 DEFAULT_EMAIL_SENDER = "test@test.com"
+
+
+# Rest FrameWork Settings
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ]
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'rest_framework.authentication.BasicAuthentication',
+    # ]
+}
+
 
 
 try:
