@@ -48,7 +48,7 @@ class Account(BaseModelClass):
         transaction = self.transactions.filter(created_at__range=[start_date, end_date + timedelta(days=1)])
         return transaction
 
-    def exportTrasactionData(self, start_date=datetime.now().date() - timedelta(days=60), end_date=datetime.now().date()):
+    def exportTransactionData(self, start_date=datetime.now().date() - timedelta(days=60), end_date=datetime.now().date()):
         data = self.getTransactionData(start_date, end_date).values()
         df = pd.DataFrame(list(data))
         fileName = hashlib.sha256(",".join([str(start_date), str(end_date), str(self.account_number)]).encode('utf-8')).hexdigest()[:10] + ".csv"

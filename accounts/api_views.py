@@ -79,7 +79,7 @@ class ExportAPIView(BaseAPIView):
                 return Response(default_response, 404)
             start_date = datetime.strptime(data["start_date"], "%Y-%m-%d").date()
             end_date = datetime.strptime(data["end_date"], "%Y-%m-%d").date()
-            filePath = account.exportTrasactionData(start_date, end_date)
+            filePath = account.exportTransactionData(start_date, end_date)
             default_response["exportPath"] = filePath
             return Response(default_response, 200)
         return Response(serializer.errors, 404)
