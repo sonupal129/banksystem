@@ -49,7 +49,7 @@ class BankingAPIView(BaseAPIView):
                 account.withdrawMoney(amount)
             default_response["balance"] = account.balanceEnquiry()
             return Response(default_response, 201)
-        return Response(serializer.errors, 200)
+        return Response(serializer.errors, 404)
 
     def get(self, request, account_number, **kwargs):
         default_response = self.default_response()
